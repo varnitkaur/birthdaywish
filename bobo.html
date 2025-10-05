@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday 🎂</title>
+  <style>
+    /* ===== Background Gradient ===== */
+    body {
+      margin: 0;
+      padding: 80px 0 0 0;
+      background: linear-gradient(to bottom, #ffe0f0, #fff0f5);
+      font-family: 'antro vectra';
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ===== Confetti Hearts and Winner Confetti ===== */
+    .confetti {
+      position: fixed;
+      top: -50px;
+      width: 15px;
+      height: 15px;
+      pointer-events: none;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      font-size: 18px;
+      opacity: 0.8;
+      z-index: 1000;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Title and subtitle ===== */
+    h1 {
+      font-size: 3.5em;
+      margin-bottom: 0.2em;
+      color: #d6336c;
+      text-shadow: 0 2px 5px #ffc0d6;
+    }
+    p.subtitle {
+      font-size: 1.6em;
+      color: #b83360;
+      margin-top: 0;
+      font-weight: 500;
+    }
+
+    h2 {
+      color: #d6336c;
+      margin-top: 40px;
+    }
+
+    /* === Photo Album === */
+    .photo-album {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .photo-album .photo {
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-album img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-album .photo:hover img {
+      transform: scale(1.1);
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-weight: bold;
+      color: #b83360;
+    }
+
+    /* === Puzzle Game === */
+    .puzzle-container {
+      margin: 60px auto;
+      max-width: 340px;
+      user-select: none;
+    }
+
+    .puzzle-board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 2px;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .puzzle-piece {
+      width: 100px;
+      height: 100px;
+      background-size: 300px 300px;
+      border-radius: 5px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .puzzle-piece.selected {
+      border-color: #d6336c;
+    }
+
+    #message {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: green;
+      margin-top: 15px;
+      min-height: 1.4em;
+    }
+
+    /* ===== Navigation Buttons ===== */
+    .nav-buttons {
+      margin: 50px auto 100px;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    /* Mom button - cloud shape */
+    .btn-mom {
+      background: #f8f0ff;
+      color: #b362ff;
+      font-weight: 700;
+      font-size: 1.3em;
+      padding: 18px 30px;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgba(179, 98, 255, 0.4);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      width: 140px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-mom:hover {
+      box-shadow: 0 8px 25px rgba(179, 98, 255, 0.6);
+    }
+    .btn-mom::before {
+      content: "☁️";
+      font-size: 1.6em;
+    }
+
+    /* Kaddu button - heart shape */
+    .btn-kaddu {
+      background: #ffe0f0;
+      color: #d6336c;
+      font-weight: 700;
+      font-size: 1.3em;
+      padding: 18px 30px;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgba(214, 51, 108, 0.4);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      width: 140px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-kaddu:hover {
+      box-shadow: 0 8px 25px rgba(214, 51, 108, 0.6);
+    }
+    .btn-kaddu::before {
+      content: "❤️";
+      font-size: 1.6em;
+    }
+
+    /* Progress Bars */
+    .progress-container {
+      max-width: 400px;
+      margin: 20px auto 50px;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    .progress-item {
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #b83360;
+    }
+
+    .progress-bar-bg {
+      background: #ffc0d6;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+      background: #d6336c;
+      height: 100%;
+      transition: width 1.2s ease-in-out;
+      border-radius: 10px;
+      width: calc(var(--progress, 0) * 1%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Hearts - dynamically created via JS -->
+
+  <h1>🎉 Happy Birthday bobo! 🎉</h1>
+  <p class="subtitle">From your kaddu💖</p>
+
+  <!-- Gym-themed Section -->
+  <h2>🏋️‍♂️ Gym Photo Album</h2>
+  <div class="photo-album">
+    <div class="photo">
+      <img src="bobo2.jpeg" alt="Workout 1" />
+      <div class="caption">🏋️ Strength Time</div>
+    </div>
+    <div class="photo">
+      <img src="bobo4.jpeg" alt="Workout 2" />
+      <div class="caption">🔥 Beast Mode</div>
+    </div>
+    <div class="photo">
+      <img src="bobo5.jpeg" alt="Workout 3" />
+      <div class="caption">🧘 Cool Down</div>
+    </div>
+    <div class="photo">
+      <img src="bobo1.jpeg" alt="Workout 4" />
+      <div class="caption">😤 Push It</div>
+    </div>
+    <div class="photo">
+      <img src="bobo3.jpeg" alt="Workout 5" />
+      <div class="caption">🏃‍♂️ Cardio Blast</div>
+    </div>
+  </div>
+
+  <h2>🧩 Gym Puzzle Game</h2>
+  <div class="puzzle-container">
+    <p>Click two pieces to swap them! Try to solve the puzzle.</p>
+    <div class="puzzle-board" id="puzzleBoard"></div>
+    <button id="shuffleBtn" style="margin-top:10px; padding:8px 16px; font-weight:bold; cursor:pointer;">Shuffle</button>
+    <div id="message"></div>
+    <div style="margin-top: 20px;">
+      <p><strong>Preview:</strong></p>
+      <img src="bobo6.jpeg" alt="Puzzle Preview" style="width:150px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <button class="btn-mom" onclick="location.href='mom.html'">Mom's Message</button>
+    <button class="btn-kaddu" onclick="location.href='kaddu.html'">Kaddu's Wishes</button>
+  </div>
+
+  <script>
+    const board = document.getElementById('puzzleBoard');
+    const message = document.getElementById('message');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const imageUrl = "bobo6.jpeg";
+
+    let pieces = [];
+    const correctOrder = [...Array(9).keys()];
+    let selectedPieceIndex = null;
+
+    // Puzzle functions
+    function createPieces() {
+      pieces = [...Array(9).keys()];
+    }
+
+    function renderPieces() {
+      board.innerHTML = "";
+      pieces.forEach((pieceIndex, idx) => {
+        const piece = document.createElement('div');
+        piece.className = 'puzzle-piece';
+        piece.style.backgroundImage = `url(${imageUrl})`;
+        piece.style.backgroundPosition = `-${(pieceIndex % 3) * 100}px -${Math.floor(pieceIndex / 3) * 100}px`;
+        piece.dataset.index = idx;
+
+        piece.addEventListener('click', () => {
+          if (selectedPieceIndex === null) {
+            selectedPieceIndex = idx;
+            piece.classList.add('selected');
+          } else if (selectedPieceIndex === idx) {
+            selectedPieceIndex = null;
+            piece.classList.remove('selected');
+          } else {
+            swapPieces(selectedPieceIndex, idx);
+            clearSelection();
+            checkWin();
+          }
+        });
+
+        board.appendChild(piece);
+      });
+    }
+
+    function swapPieces(i, j) {
+      [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+      renderPieces();
+    }
+
+    function clearSelection() {
+      selectedPieceIndex = null;
+      board.querySelectorAll('.puzzle-piece.selected').forEach(el => el.classList.remove('selected'));
+    }
+
+    // ===== Background Hearts Confetti =====
+    let heartsConfettiInterval = null;
+    let winnerConfettiInterval = null;
+
+    function createHeartsConfetti() {
+      const confettiCount = 5;
+
+      function spawnConfetti() {
+        for(let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.animationDuration = (4 + Math.random() * 3) + 's';
+          confetti.style.fontSize = (12 + Math.random() * 10) + 'px';
+          confetti.style.animationDelay = '0s';
+          confetti.textContent = "❤️";
+          confetti.style.color = '#ff6f91'; // pink hearts
+          document.body.appendChild(confetti);
+          confetti.addEventListener('animationend', () => confetti.remove());
+        }
+      }
+
+      spawnConfetti();
+      heartsConfettiInterval = setInterval(spawnConfetti, 3000);
+    }
+
+    function stopHeartsConfetti() {
+      if(heartsConfettiInterval) {
+        clearInterval(heartsConfettiInterval);
+        heartsConfettiInterval = null;
+      }
+      document.querySelectorAll('.confetti').forEach(el => el.remove());
+    }
+
+    function createWinnerConfetti() {
+      stopHeartsConfetti();
+
+      const confettiCount = 50;
+      const winnerEmojis = ["🎉", "🌟", "🎈", "✨", "🥳"];
+      const colors = ['#ff6f91', '#ffb347', '#ffd700', '#00ff7f', '#00ced1'];
+
+      function spawnConfetti() {
+        for(let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.animationDuration = (4 + Math.random() * 3) + 's';
+          confetti.style.fontSize = (14 + Math.random() * 18) + 'px';
+          confetti.style.animationDelay = (Math.random() * 2) + 's';
+          confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+          confetti.textContent = winnerEmojis[Math.floor(Math.random() * winnerEmojis.length)];
+          document.body.appendChild(confetti);
+          confetti.addEventListener('animationend', () => confetti.remove());
+        }
+      }
+
+      spawnConfetti();
+
+      // Keep spawning confetti every 3 seconds
+      winnerConfettiInterval = setInterval(spawnConfetti, 3000);
+
+      // Automatically stop winner confetti after 8 seconds
+      setTimeout(stopWinnerConfetti, 8000);
+    }
+
+    function stopWinnerConfetti() {
+      if(winnerConfettiInterval) {
+        clearInterval(winnerConfettiInterval);
+        winnerConfettiInterval = null;
+      }
+      document.querySelectorAll('.confetti').forEach(el => el.remove());
+    }
+
+    // Check if puzzle is solved
+    function checkWin() {
+      // Check if pieces are in correct order
+      const current = Array.from(board.children).map(el => +el.dataset.index);
+      if (current.every((val, idx) => val === correctOrder[idx])) {
+        message.textContent = "🎉 You solved the puzzle!";
+        createWinnerConfetti();
+      } else {
+        message.textContent = "";
+        stopWinnerConfetti();
+      }
+    }
+
+    // Shuffle pieces and stop winner confetti, start hearts confetti again
+    function shufflePieces() {
+      pieces.sort(() => Math.random() - 0.5);
+      renderPieces();
+      message.textContent = "";
+      stopWinnerConfetti();
+
+      // Restart hearts confetti
+      if (!heartsConfettiInterval) {
+        createHeartsConfetti();
+      }
+    }
+
+    shuffleBtn.addEventListener('click', shufflePieces);
+
+    // Initialize puzzle & hearts confetti on page load
+    createPieces();
+    shufflePieces();
+    createHeartsConfetti();
+
+  </script>
+
+</body>
+</html>
